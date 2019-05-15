@@ -1,0 +1,10 @@
+[package]
+name = "funcsharp"
+version = "0.1.0"
+authors = ["Tibor Prokai <tibor@kotem.com>"]
+edition = "2018"
+
+[dependencies]
+clap = "2.33.0"
+pest = "2.1.1"
+pest_derive = "2.1.0"
