@@ -2,9 +2,9 @@
 Generates boilerplate code into C# .cs files for functional programming friendly readonly structs/classes
 
 # Usage:
-#region func# <yor class name> <options>
+`#region func# <yor class name> <options>
   <your fields / properties>
-#endregion
+`#endregion
     
 # Possible options:
     C - *public* constructor generation for every fields
@@ -17,10 +17,10 @@ Generates boilerplate code into C# .cs files for functional programming friendly
 
     public struct Position2d
     {
-#region func# Position2d CWLP
+`#region func# Position2d CWLP
         public readonly double x;
         public readonly double y;
-#endregion
+`#endregion
         
         public static readonly Position2d Origo = new Position2d(0, 0);
 
@@ -34,10 +34,10 @@ Generates boilerplate code into C# .cs files for functional programming friendly
 
     public struct Position2d
     {
-#region func# Position2d CWLP
+`#region func# Position2d CWLP
         public readonly double x;
         public readonly double y;
-#region #generated 56338F7B 0.1.0
+`#region #generated 56338F7B 0.1.0
         public double X { get { return this.x; } }
         public double Y { get { return this.y; } }
 
@@ -65,9 +65,8 @@ Generates boilerplate code into C# .cs files for functional programming friendly
                 x: this.x,
                 y: y);
         }
-#endregion
-
-#endregion
+`#endregion
+`#endregion
         
         public static readonly Position2d Origo = new Position2d(0, 0);
 
