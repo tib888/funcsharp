@@ -15,14 +15,10 @@ namespace ns.dummy
                 Last
             }
 
-            #region #func Inner
-            public readonly int field;
-            public readonly Pair<string, double> field;
+            #region func# Inner C
+            public readonly int field1;
+            public readonly Pair<string, double> field2;
             private readonly Tags tag;
-
-            #region #generated
-            //...
-            #endregion
             #endregion
         }
 
@@ -36,10 +32,16 @@ namespace ns.dummy
             Last
         }
 
-        #region func# Outer
-        public readonly int field = 0;
-        public readonly Pair<string, int> field = new Pair<string, int>(String.Empty, 0);
+        #region func# Outer CWLP
+        public readonly int field3 = 0;
+        public readonly Pair<string, int> field4 = new Pair<string, int>(String.Empty, 0);
         private readonly Tags tag;    //hello
+
+            #region #generated
+                //...
+                string blag = "";
+                Inner(blag);
+            #endregion
         #endregion
 
         ///docu
