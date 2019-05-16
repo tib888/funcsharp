@@ -16,7 +16,7 @@ Where output file name may be the same as input file name.
 
 ## Possible options:
     C - public constructor generation for every fields
-    C - private constructor generation for every fields
+    c - private constructor generation for every fields
     W - With(...) generation for every fields
     L - Lens generation for every fields
     P - property getter generation for every fields
