@@ -1,4 +1,4 @@
-# FunC# | FuncySharp | func C#
+# Call this tool 'func sharp' | 'fun C#' | 'fancy sharp' as you like!
 Generates boilerplate code into C# .cs files for functional programming friendly readonly structs/classes
 
 # Usage from command line:
