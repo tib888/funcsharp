@@ -1,38 +1,45 @@
-# FunC# | FuncySharp | func C3
+# FunC# | FuncySharp | func C#
 Generates boilerplate code into C# .cs files for functional programming friendly readonly structs/classes
 
-# Usage:
-\#region func# <yor class name> <options>
+# Usage from command line:
+```funcsharp.exe <input file name> <output file name>```
+Where output file name may be the same as input file name. 
+(This is the tipical case.)
+
+# Usage in the code
+```
+#region func# <you class name> <options>
   <your fields / properties>
-\#endregion
-    
+#endregion
+```
+
 # Possible options:
-    C - *public* constructor generation for every fields
-    C - *private* constructor generation for every fields
+    C - **public** constructor generation for every fields
+    C - **private** constructor generation for every fields
     W - With(...) generation for every fields
     L - Lens generation for every fields
     P - property getter generation for every fields
 
 # Example Input:
-
+```
     public struct Position2d
     {
-\#region func# Position2d CWLP
+#region func# Position2d CWLP
         public readonly double x;
         public readonly double y;
-\#endregion
+#endregion
         
         public static readonly Position2d Origo = new Position2d(0, 0);
     }
-
+```
 # Example Output:
-
+```
     public struct Position2d
     {
-\#region func# Position2d CWLP
+#region func# Position2d CWLP
         public readonly double x;
         public readonly double y;
-\#region #generated 56338F7B 0.1.0
+#region #generated 56338F7B 0.1.0
         public double X { get { return this.x; } }
         public double Y { get { return this.y; } }
 
@@ -60,8 +67,9 @@ Generates boilerplate code into C# .cs files for functional programming friendly
                 x: this.x,
                 y: y);
         }
-\#endregion
-\#endregion
+#endregion
+#endregion
         
         public static readonly Position2d Origo = new Position2d(0, 0);
     }
+```
