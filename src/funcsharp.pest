@@ -26,10 +26,14 @@ options = @{ alpha* }
 
 region_name = @{ (!NEWLINE ~ ANY)* }
 region = { region_name ~ content }
+
 request_marker = @{"func#"}
 gen_request = { request_marker ~ identifier ~ options? ~ field_declaration* ~ gen_response? }
+
 generated_marker = @{"#generated"}
-gen_response = { region_start ~ generated_marker ~ fill* ~ region_end } 
+crc = @{ (digit | 'a'..'f' | 'A'..'F')* }
+version = @{ digit* }
+gen_response = { region_start ~ generated_marker ~ crc ~ version ~ fill* ~ region_end } 
 
 fill = @{(!region_end ~ ANY)}
 
