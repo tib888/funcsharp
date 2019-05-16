@@ -1,26 +1,27 @@
 # Call this tool 'func sharp' | 'fun C#' | 'fancy sharp' as you like!
 Generates boilerplate code into C# .cs files for functional programming friendly readonly structs/classes
 
-# Usage from command line:
-```funcsharp.exe <input file name> <output file name>```
+## Usage from command line:
+```
+funcsharp.exe <input file name> <output file name>
+```
 Where output file name may be the same as input file name. 
-(This is the tipical case.)
 
-# Usage in the code
+## Usage in the code
 ```
 #region func# <you class name> <options>
   <your fields / properties>
 #endregion
 ```
 
-# Possible options:
-    C - **public** constructor generation for every fields
-    C - **private** constructor generation for every fields
+## Possible options:
+    C - public constructor generation for every fields
+    C - private constructor generation for every fields
     W - With(...) generation for every fields
     L - Lens generation for every fields
     P - property getter generation for every fields
 
-# Example Input:
+## Example Input:
 ```
     public struct Position2d
     {
@@ -32,7 +33,7 @@ Where output file name may be the same as input file name.
         public static readonly Position2d Origo = new Position2d(0, 0);
     }
 ```
-# Example Output:
+## Example Output:
 ```
     public struct Position2d
     {
