@@ -17,8 +17,8 @@ Where output file name may be the same as input file name.
 ## Possible options:
     C - public constructor generation for every fields
     c - private constructor generation for every fields
-    W - With(...) generation for every fields at once
-    w - WithXXX(.) generation for every fields separately
+    w - With(...) generation for every fields at once
+    W - WithXXX(.) generation for every fields separately
     P - property getter generation for every fields"#)
 
 ## Example Input:
