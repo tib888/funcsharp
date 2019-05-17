@@ -25,7 +25,7 @@ Where output file name may be the same as input file name.
 ```
     public struct Position2d
     {
-#region func# Position2d CWLP
+#region func# Position2d CWwP
         public readonly double x;
         public readonly double y;
 #endregion
@@ -37,7 +37,7 @@ Where output file name may be the same as input file name.
 ```
     public struct Position2d
     {
-#region func# Position2d CWLP
+#region func# Position2d CWwP
         public readonly double x;
         public readonly double y;
 #region #generated 56338F7B 0.1.0
