@@ -149,7 +149,7 @@ fn process_request(file: pest::iterators::Pairs<Rule>) -> String {
     }
 
     //universal lens like WithXXX setters   //not good for value types: some ? need to be added manually
-    if options.contains('W') || options.contains('w') {
+    if options.contains('w') {
         generated += "\r\n        public ";
         generated += &class_name;
         generated += " With(";
@@ -180,7 +180,7 @@ fn process_request(file: pest::iterators::Pairs<Rule>) -> String {
     }
 
     //lens like WithXXX setters
-    if options.contains('L') || options.contains('l') {
+    if options.contains('W') {
         for (type_name, name, _) in fields.to_owned() {
             let n = name[0..1].to_uppercase().to_owned() + &name[1 as usize..];
             generated += &format!("        public {0} With{1}({2} {3})\r\n        {{\r\n            return new {0}(\r\n", &class_name, &n, &type_name, &name);
@@ -260,16 +260,16 @@ fn parse(input: &str) -> Result<String, String> {
     }
 }
 
-fn run(input_filename: &str, output_filename: &str) -> Result<(), String> {
+fn run(input_filename: &str, output_filename: &str, backup_filename: Option<&str>) -> Result<(), String> {
     let input = fs::read_to_string(input_filename).expect("cannot read input file");
     let result = parse(&input)?;   
 
-    if input_filename == output_filename {
+    if let Some(backup_filename) = backup_filename {
         if input == result {
             return Ok(());
         }            
-        let mut bk = fs::File::create(input_filename.to_owned() + ".bk").expect("cannot open backup file");
-        bk.write(input.as_bytes()).expect("cannot write .bk file");        
+        let mut bk = fs::File::create(backup_filename).expect("cannot open backup file");
+        bk.write(input.as_bytes()).expect("cannot write backup file");        
     }
     let mut output = fs::File::create(output_filename).expect("cannot open output file");
     output
@@ -280,23 +280,58 @@ fn run(input_filename: &str, output_filename: &str) -> Result<(), String> {
 }
 
 fn main() {
+    const VERSION: &'static str = env!("CARGO_PKG_VERSION");
+
     let matches = App::new("C++ sumtype")
-        .version("0.1")
+        .version(VERSION)
         .about("Generates C# code: Constructor, With, Lens for readonly struct to get rid of typing boilerplate code.")
+        .help(
+r#"Generates C# boilerplate code from the fileds marked with a decorated region.
+
+# Example usage in your code: 
+
+    public struct Position2d
+    {
+#region func# Position2d CWwP
+        public readonly double x;
+        public readonly double y;
+#endregion
+        
+        public static readonly Position2d Origo = new Position2d(0, 0);
+    }
+
+# Details:
+
+#region func# <you class name> <options>
+  <your fields / properties>
+#endregion
+
+# Options:
+
+    C - public constructor generation for every fields
+    c - private constructor generation for every fields
+    W - With(...) generation for every fields at once
+    w - WithXXX(.) generation for every fields separately
+    P - property getter generation for every fields"#)
+
         .author("Tibor P")
         .arg(Arg::with_name("INPUT")
             .help("Sets the input file to use")
             .required(true)
             .index(1))
         .arg(Arg::with_name("OUTPUT")
-            .help("Sets the output file to use //TODO (may be the same as the INPUT)")
+            .help("Sets the output file to use (may be the same as the INPUT)")
             .required(true)
             .index(2))
+        .arg(Arg::with_name("BACKUP")
+            .help("Sets the backup file to use (when the OUTPUT is the same as the INPUT)")
+            .required(false)
+            .index(3))
         .get_matches();
 
     if let Some(input_filename) = matches.value_of("INPUT") {
         if let Some(output_filename) = matches.value_of("OUTPUT") {
-            if let Err(error) = run(input_filename, output_filename) {
+            if let Err(error) = run(input_filename, output_filename, matches.value_of("BACKUP")) {
                 println!("ERROR: {:?}", error);
             } else {
                 println!("Successfully written: {}", output_filename);
