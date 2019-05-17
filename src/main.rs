@@ -310,8 +310,8 @@ r#"Generates C# boilerplate code from the fileds marked with a decorated region.
 
     C - public constructor generation for every fields
     c - private constructor generation for every fields
-    W - With(...) generation for every fields at once
-    w - WithXXX(.) generation for every fields separately
+    w - With(...) generation for every fields at once
+    W - WithXXX(.) generation for every fields separately
     P - property getter generation for every fields"#)
 
         .author("Tibor P")
